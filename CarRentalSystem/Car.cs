@@ -12,7 +12,8 @@ namespace CarRentalSystem
         private string model;
         private string yearOfManufacture;
         private string regPlate;
-        private float costToRent;
         private string bodyType;
+        private float costToRent;
+        private bool isAvailable;        
     }
 }
