@@ -6,5 +6,8 @@ string cPath = "Cars.txt";
 List<Car> cars = new List<Car>();
 List<User> users = new List<User>();
 
-Console.Write("Enter your username: ");
+Console.Write("Username: ");
 string uName = Console.ReadLine();
+
+Console.Write("Password: ");
+string password = Console.ReadLine();
