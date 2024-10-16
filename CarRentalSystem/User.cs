@@ -10,6 +10,7 @@ namespace CarRentalSystem
     {
         private string fName;
         private string lName;
+        private string userName;
         private string password;
         private string email;
         private string DoB;
