@@ -1,4 +1,5 @@
 ﻿using CarRentalSystem;
+using System.Globalization;
 /*
 string uPath = "Users.txt";
 string cPath = "Cars.txt";
@@ -53,6 +54,11 @@ if (isStaff)
         switch (userOption) 
         {
             case "1":
+                Car newCar = new Car();
+
+                Console.WriteLine("Enter vehicle details");
+                Console.Write("Make: ");
+                newCar.GetMake(Console.ReadLine().Trim());
                 break;
             case "2":
                 break; 
