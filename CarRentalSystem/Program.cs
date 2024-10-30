@@ -6,16 +6,21 @@ string cPath = "Cars.txt";
 List<Car> cars = new List<Car>();
 List<User> users = new List<User>();
 */
-
+bool isStaff = false;
 while (true)
 {
     Console.Write("Username: ");
-    string uName = Console.ReadLine();
+    string uName = Console.ReadLine().Trim();
 
     Console.Write("Password: ");
-    string password = Console.ReadLine();
+    string password = Console.ReadLine().Trim();
 
     if (uName.ToLower() == "admin" && password.ToLower() == "password")//placeholder for now
+    {
+        isStaff = true;
+        break;
+    }
+    else if(uName.ToLower() == "user" && password.ToLower() == "password")
     {
         break;
     }
@@ -26,3 +31,5 @@ while (true)
         Console.Clear();
     }
 }
+
+Console.WriteLine(isStaff);
