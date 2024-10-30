@@ -52,5 +52,33 @@ namespace CarRentalSystem
                 Console.Write($"{username} is not staff");
             }
         }
+        public void GetfName(string firstName)
+        {
+            fName = firstName;
+        }
+        public void GetlName(string lastName)
+        {
+            lName = lastName;
+        }
+        public void Getusername(string Username)
+        {
+            username = Username;
+        }
+        public void GetPassword(string Password)
+        {
+            password = Password;
+        }
+        public void GetEmail(string Email)
+        {
+            email = Email;
+        }
+        public void GetDoB(string DOB)
+        {
+            DoB = DOB;
+        }
+        public void GetIsStaff(bool staff)
+        {
+            isStaff = staff;
+        }
     }
 }
