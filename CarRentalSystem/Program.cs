@@ -63,12 +63,11 @@ if (isStaff)
                 Console.ReadLine();
                 Console.WriteLine("Number plate: ");
                 Console.ReadLine();
-                Console.WriteLine("");
+                Console.WriteLine("Body type: ");
                 Console.ReadLine();
-                Console.WriteLine("");
+                Console.WriteLine("Cost to rent: ");
                 Console.ReadLine();
-                Console.WriteLine("");
-                Console.ReadLine();
+                //isAvaliable always is true for new vehicles
                 break;
             case "2":
                 break; 
