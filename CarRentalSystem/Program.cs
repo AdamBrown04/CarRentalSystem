@@ -58,7 +58,17 @@ if (isStaff)
                 Console.Write("Make: ");
                 Console.ReadLine();
                 Console.Write("Model: ");
-                Console.ReadLine();    
+                Console.ReadLine();
+                Console.Write("Year of manufacture: ");
+                Console.ReadLine();
+                Console.WriteLine("Number plate: ");
+                Console.ReadLine();
+                Console.WriteLine("");
+                Console.ReadLine();
+                Console.WriteLine("");
+                Console.ReadLine();
+                Console.WriteLine("");
+                Console.ReadLine();
                 break;
             case "2":
                 break; 

@@ -11,16 +11,16 @@ namespace CarRentalSystem
         private string make;
         private string model;
         private string yearOfManufacture;
-        private string regPlate;
+        private string numberPlate;
         private string bodyType;
         private float costToRent;
         private bool isAvailable;     
         
-        public Car(string make, string model, string yearOfManufacture, string regPlate, string bodyType, float costToRent, bool isAvailable)
+        public Car(string make, string model, string yearOfManufacture, string numberPlate, string bodyType, float costToRent, bool isAvailable)
         {
             this.make = make;
             this.model = model;
-            this.regPlate = regPlate;
+            this.numberPlate = numberPlate;
             this.bodyType = bodyType;
             this.yearOfManufacture = yearOfManufacture;
             this.costToRent = costToRent;
@@ -39,9 +39,9 @@ namespace CarRentalSystem
         {
             return yearOfManufacture;
         }
-        public string GetRegPlate()
+        public string GetNumberPlate()
         {
-            return regPlate;
+            return numberPlate;
         }
         public string GetBodyType()
         {
