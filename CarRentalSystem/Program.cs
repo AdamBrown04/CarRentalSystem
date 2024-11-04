@@ -54,11 +54,11 @@ if (isStaff)
         switch (userOption) 
         {
             case "1":
-                Car newCar = new Car();
-
                 Console.WriteLine("Enter vehicle details");
                 Console.Write("Make: ");
-                newCar.GetMake(Console.ReadLine().Trim());
+                Console.ReadLine();
+                Console.Write("Model: ");
+                Console.ReadLine();    
                 break;
             case "2":
                 break; 
