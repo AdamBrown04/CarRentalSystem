@@ -3,12 +3,12 @@ using System.Globalization;
 /*
 string uPath = "Users.txt";
 string cPath = "Cars.txt";
-
-List<Car> cars = new List<Car>();
-List<User> users = new List<User>();
-
 need to add it so the file will output into the list which I can the use to sort certain things e.i if a vehicle is rented 
 */
+List<Car> Cars = new List<Car>();
+List<User> users = new List<User>();
+
+
 
 //change it so instead of using the boolean vairable, uses classes instead and returns the users class that has logged in, removing the else if
 bool isStaff = false;
@@ -67,9 +67,44 @@ if (isStaff)
                 Console.ReadLine();
                 Console.WriteLine("Cost to rent: ");
                 Console.ReadLine();
+                //new Car = new Car(); need to figure out how to store the temp vairables the best for the constructor to handle
                 //isAvaliable always is true for new vehicles
                 break;
             case "2":
+                Console.Write("Enter number plate of vehicle you want to remove: ");
+                string carToRemove = Console.ReadLine();
+                if (carToRemove.Length == 8)
+                {
+                    bool carExists = false;
+                    foreach(Car car in Cars)
+                    {
+                        if(car.GetNumberPlate() == carToRemove)
+                        {
+                        carExists = true;
+                        break;
+                        }
+                    }
+                    if (carExists)
+                    {
+                        Console.Write($"Are you sure you want to remove {carToRemove}(Y/N): ");
+                        if (Console.ReadLine().ToUpper() == "Y")
+                        {
+                            //remove item from list
+                        }
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.Write("The number plate that has been entered cannot be found");
+                        Task.Delay(1500).Wait();
+                    }
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.Write("Please enter a valid number plate");
+                    Task.Delay(1500).Wait();
+                }
                 break; 
             case "3":
                 break;
