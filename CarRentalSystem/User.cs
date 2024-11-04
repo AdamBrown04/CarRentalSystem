@@ -10,75 +10,47 @@ namespace CarRentalSystem
     {
         private string fName;
         private string lName;
-        private string username;
-        private string password;
         private string email;
+        private string password;
         private string DoB;
         private bool isStaff;
         private List<string> rentHistory = new List<string>();
 
-        public void ViewfName()
+        public User(string name, string email, string password, string DoB, bool isStaff, List<string> rentalHistory)
         {
-            Console.Write(fName);
+            string[] names = name.Split(" ");
+            fName = names[0];
+            lName = names[1];
+            this.email = email;
+            this.password = password;
+            this.DoB = DoB;
+            this.isStaff = isStaff;
+            this.rentHistory = rentalHistory;
         }
-        public void ViewlName()
+
+        public string GetName()
         {
-            Console.Write(lName);
+            return fName + " " + lName;
         }
-        public void ViewUsername()
+        public string GetPassword()
         {
-            Console.Write(username);
+            return password;
         }
-        public void ViewPassword()
+        public string GetEmail()
         {
-            Console.Write(password);
+            return email;
         }
-        public void ViewEmail()
+        public string GetDoB()
         {
-            Console.Write(email);
+            return DoB;
         }
-        public void ViewDoB()
+        public bool GetIsStaff()
         {
-            Console.Write(DoB);
+            return isStaff;
         }
-        public void ViewIsStaff()
+        public List<string> GetRentHistory()
         {
-            if (isStaff)
-            {
-                Console.Write($"{username} is staff");
-            }
-            else
-            {
-                Console.Write($"{username} is not staff");
-            }
-        }
-        public void GetfName(string firstName)
-        {
-            fName = firstName;
-        }
-        public void GetlName(string lastName)
-        {
-            lName = lastName;
-        }
-        public void Getusername(string Username)
-        {
-            username = Username;
-        }
-        public void GetPassword(string Password)
-        {
-            password = Password;
-        }
-        public void GetEmail(string Email)
-        {
-            email = Email;
-        }
-        public void GetDoB(string DOB)
-        {
-            DoB = DOB;
-        }
-        public void GetIsStaff(bool staff)
-        {
-            isStaff = staff;
+            return rentHistory;
         }
     }
 }
