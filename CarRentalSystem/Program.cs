@@ -205,6 +205,7 @@ if (isStaff)
 else
 {
     bool exit = false;
+    User currentUser = 
 
     while (!exit)
     {
@@ -219,6 +220,7 @@ else
             case "2":
                 break;
             case "3":
+                List<string> rentHistory = ;
                 break;
             case "4":
                 break;
