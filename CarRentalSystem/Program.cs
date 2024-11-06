@@ -56,19 +56,19 @@ if (isStaff)
             case "1":
                 Console.WriteLine("Enter vehicle details");
                 Console.Write("Make: ");
-                Console.ReadLine();
+                string make = Console.ReadLine();
                 Console.Write("Model: ");
-                Console.ReadLine();
+                string model = Console.ReadLine();
                 Console.Write("Year of manufacture: ");
-                Console.ReadLine();
+                string yom = Console.ReadLine();
                 Console.WriteLine("Number plate: ");
-                Console.ReadLine();
+                string numberPlate = Console.ReadLine();
                 Console.WriteLine("Body type: ");
-                Console.ReadLine();
+                string bodyType = Console.ReadLine();
                 Console.WriteLine("Cost to rent: ");
-                Console.ReadLine();
-                //new Car = new Car(); need to figure out how to store the temp vairables the best for the constructor to handle
-                //isAvaliable always is true for new vehicles
+                float costToRent = Convert.ToSingle(Console.ReadLine());
+                Car newCar = new Car(make, model, yom, numberPlate, bodyType, costToRent, true);
+
                 break;
             case "2":
                 Console.Write("Enter number plate of vehicle you want to remove: ");
