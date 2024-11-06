@@ -6,7 +6,7 @@ string cPath = "Cars.txt";
 need to add it so the file will output into the list which I can the use to sort certain things e.i if a vehicle is rented 
 */
 Dictionary<string, Car>cars = new Dictionary<string, Car>();
-List<User> users = new List<User>();
+Dictionary<string, User>users = new Dictionary<string, User>();
 
 
 
@@ -128,9 +128,29 @@ if (isStaff)
                 string password = Console.ReadLine();
                 Console.Write("Date of birth: ");
                 string dob = Console.ReadLine();
-                Console.Write("");
-                string isStafff = Console.ReadLine();
+                bool staffCheck;
+                while (true)
+                {
+                    Console.Write("Staff(true/false): ");
+                    string staff = Console.ReadLine().ToLower();
+                    if (staff == "true")
+                    {
+                        staffCheck = true;
+                        break;
+                    }
+                    else if (staff == "false")
+                    {
+                        staffCheck = false;
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid option, please enter either true or false");
+                    }
+                }
                 List<string> previousRents = new List<string>();
+                User newUser = new User(name, email, password, dob, staffCheck, previousRents);
+                users.Add(email, newUser);
                 break;
             case "4":
                 break;
