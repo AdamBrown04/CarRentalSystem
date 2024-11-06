@@ -153,6 +153,37 @@ if (isStaff)
                 users.Add(email, newUser);
                 break;
             case "4":
+                Console.Write("Enter email of user you wish to remove: ");
+                string emailToRemove = Console.ReadLine();
+                if (users.ContainsKey(emailToRemove))
+                {
+                    while (true)
+                    {
+                        Console.Write($"Are you sure you want to delete {emailToRemove}(Y/N): ");
+                        string confirmation = Console.ReadLine().ToUpper();
+                        if (confirmation == "Y")
+                        {
+                            users.Remove(emailToRemove);
+                            Console.Clear();
+                            Console.WriteLine($"{emailToRemove} has been removed");
+                            Task.Delay(1500).Wait();
+                            break;
+                        }
+                        else if (confirmation == "N")
+                        {
+                            Console.Clear();
+                            Console.WriteLine($"{emailToRemove} has not been removed");
+                            Task.Delay(1500).Wait();
+                            break;
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Input is invalid, please provide a valid input");
+                            Task.Delay(1500).Wait();
+                        }
+                    }
+                }
                 break;
             case "5":
                 break;
