@@ -8,6 +8,7 @@ namespace CarRentalSystem
 {
     internal class User
     {
+        //attributes
         private string fName;
         private string lName;
         private string email;
@@ -15,7 +16,7 @@ namespace CarRentalSystem
         private string dob;
         private bool isStaff;
         private List<string> rentHistory = new List<string>();
-
+        //constructor
         public User(string name, string email, string password, string DoB, bool isStaff, List<string> rentalHistory)
         {
             string[] names = name.Split(" ");
@@ -23,11 +24,11 @@ namespace CarRentalSystem
             lName = names[1];
             this.email = email;
             this.password = password;
-            this.dob = DoB;
+            dob = DoB;
             this.isStaff = isStaff;
-            this.rentHistory = rentalHistory;
+            rentHistory = rentalHistory;
         }
-
+        //Get operations
         public string GetName()
         {
             return fName + " " + lName;

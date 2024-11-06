@@ -8,14 +8,16 @@ namespace CarRentalSystem
 {
     internal class Car
     {
+        //attributes
         private string make;
         private string model;
         private string yearOfManufacture;
         private string numberPlate;
         private string bodyType;
         private float costToRent;
-        private bool isAvailable;     
-        
+        private bool isAvailable;
+        private string emailOfCurrentRenter;
+        //constructor
         public Car(string make, string model, string yearOfManufacture, string numberPlate, string bodyType, float costToRent, bool isAvailable)
         {
             this.make = make;
@@ -26,7 +28,7 @@ namespace CarRentalSystem
             this.costToRent = costToRent;
             this.isAvailable = isAvailable;
         }
-
+        //get operations
         public string GetMake()
         {
             return make;
@@ -53,7 +55,16 @@ namespace CarRentalSystem
         }
         public bool GetAvailability()
         {
-           return isAvailable;
+            return isAvailable;
+        }
+        public string GetEmailOfCurrentRenter()
+        {
+            return emailOfCurrentRenter;
+        }
+        //set operations
+        public void SetEmailOfCurrentRenter(string email)
+        {
+            emailOfCurrentRenter = email;
         }
     }
 }
