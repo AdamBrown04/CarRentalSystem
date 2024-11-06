@@ -12,7 +12,7 @@ namespace CarRentalSystem
         private string lName;
         private string email;
         private string password;
-        private string DoB;
+        private string dob;
         private bool isStaff;
         private List<string> rentHistory = new List<string>();
 
@@ -23,7 +23,7 @@ namespace CarRentalSystem
             lName = names[1];
             this.email = email;
             this.password = password;
-            this.DoB = DoB;
+            this.dob = DoB;
             this.isStaff = isStaff;
             this.rentHistory = rentalHistory;
         }
@@ -42,7 +42,7 @@ namespace CarRentalSystem
         }
         public string GetDoB()
         {
-            return DoB;
+            return dob;
         }
         public bool GetIsStaff()
         {

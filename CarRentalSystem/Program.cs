@@ -119,6 +119,18 @@ if (isStaff)
                 }
                 break;
             case "3":
+                Console.WriteLine("Enter persons information");
+                Console.Write("Name: ");
+                string name = Console.ReadLine();
+                Console.Write("Email: ");
+                string email = Console.ReadLine();
+                Console.Write("Password: ");
+                string password = Console.ReadLine();
+                Console.Write("Date of birth: ");
+                string dob = Console.ReadLine();
+                Console.Write("");
+                string isStafff = Console.ReadLine();
+                List<string> previousRents = new List<string>();
                 break;
             case "4":
                 break;
