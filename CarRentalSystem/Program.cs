@@ -68,7 +68,7 @@ if (isStaff)
                 Console.WriteLine("Cost to rent: ");
                 float costToRent = Convert.ToSingle(Console.ReadLine());
                 Car newCar = new Car(make, model, yom, numberPlate, bodyType, costToRent, true);
-
+                cars.Add(numberPlate, newCar);
                 break;
             case "2":
                 Console.Write("Enter number plate of vehicle you want to remove: ");
@@ -128,6 +128,9 @@ if (isStaff)
                 break;
             case "7":
                 exit = true;
+                break;
+            case "0":
+                //output all items in dictionary to test if adding a class just called newCar will cause issues
                 break;
             default: 
                 Console.WriteLine("INVALID INPUT! \nPLEASE INPUT AN OPTION SHOWN IN THE LIST");
