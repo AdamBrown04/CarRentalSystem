@@ -61,11 +61,11 @@ if (isStaff)
                 string model = Console.ReadLine();
                 Console.Write("Year of manufacture: ");
                 string yom = Console.ReadLine();
-                Console.WriteLine("Number plate: ");
+                Console.Write("Number plate: ");
                 string numberPlate = Console.ReadLine();
-                Console.WriteLine("Body type: ");
+                Console.Write("Body type: ");
                 string bodyType = Console.ReadLine();
-                Console.WriteLine("Cost to rent: ");
+                Console.Write("Cost to rent: ");
                 float costToRent = Convert.ToSingle(Console.ReadLine());
                 Car newCar = new Car(make, model, yom, numberPlate, bodyType, costToRent, true);
                 cars.Add(numberPlate, newCar);
@@ -128,9 +128,6 @@ if (isStaff)
                 break;
             case "7":
                 exit = true;
-                break;
-            case "0":
-                //output all items in dictionary to test if adding a class just called newCar will cause issues
                 break;
             default: 
                 Console.WriteLine("INVALID INPUT! \nPLEASE INPUT AN OPTION SHOWN IN THE LIST");
