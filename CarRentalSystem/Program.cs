@@ -5,7 +5,7 @@ string uPath = "Users.txt";
 string cPath = "Cars.txt";
 need to add it so the file will output into the list which I can the use to sort certain things e.i if a vehicle is rented 
 */
-List<Car> Cars = new List<Car>();
+Dictionary<string, Car>cars = new Dictionary<string, Car>();
 List<User> users = new List<User>();
 
 
@@ -75,27 +75,39 @@ if (isStaff)
                 string carToRemove = Console.ReadLine();
                 if (carToRemove.Length == 8)
                 {
-                    bool carExists = false;
-                    foreach(Car car in Cars)
+                    if(cars.ContainsKey(carToRemove))
                     {
-                        if(car.GetNumberPlate() == carToRemove)
+                        while (true)
                         {
-                        carExists = true;
-                        break;
-                        }
-                    }
-                    if (carExists)
-                    {
-                        Console.Write($"Are you sure you want to remove {carToRemove}(Y/N): ");
-                        if (Console.ReadLine().ToUpper() == "Y")
-                        {
-                            //remove item from list
+                            Console.Write($"Are you sure you want to remove {carToRemove}(Y/N): ");
+                            string confirmation = Console.ReadLine().ToUpper();
+                            if (confirmation == "Y")
+                            {
+                                cars.Remove(carToRemove);
+                                Console.Clear();
+                                Console.WriteLine($"{carToRemove} has been removed");
+                                Task.Delay(1500).Wait();
+                                break;
+                            }
+                            else if (confirmation == "N")
+                            {
+                                Console.Clear();
+                                Console.WriteLine($"{carToRemove} has not been removed");
+                                Task.Delay(1500).Wait();
+                                break;
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Input is invalid, please provide a valid input");
+                                Task.Delay(1500).Wait();
+                            }
                         }
                     }
                     else
                     {
                         Console.Clear();
-                        Console.Write("The number plate that has been entered cannot be found");
+                        Console.Write("This vehicle does not exist");
                         Task.Delay(1500).Wait();
                     }
                 }
@@ -105,7 +117,7 @@ if (isStaff)
                     Console.Write("Please enter a valid number plate");
                     Task.Delay(1500).Wait();
                 }
-                break; 
+                break;
             case "3":
                 break;
             case "4":
