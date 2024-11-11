@@ -184,8 +184,22 @@ if (isStaff)
                 }
                 break;
             case "5":
+                foreach(KeyValuePair<string, Car> kvp in cars)
+                {
+                    if (cars[kvp.Key].GetAvailability())
+                    {
+                        Console.WriteLine(kvp.Key);
+                    }
+                }
                 break;
             case "6":
+                foreach (KeyValuePair<string, Car> kvp in cars)
+                {
+                    if (!cars[kvp.Key].GetAvailability())
+                    {
+                        Console.WriteLine(kvp.Key);
+                    }
+                }
                 break;
             case "7":
                 exit = true;
