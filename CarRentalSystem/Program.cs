@@ -1,10 +1,6 @@
 ﻿using CarRentalSystem;
 using System.Globalization;
-/*
-string uPath = "Users.txt";
-string cPath = "Cars.txt";
-need to add it so the file will output into the list which I can the use to sort certain things e.i if a vehicle is rented 
-*/
+
 Dictionary<string, Car>cars = new Dictionary<string, Car>();
 Dictionary<string, User>users = new Dictionary<string, User>();
 
@@ -12,20 +8,22 @@ Dictionary<string, User>users = new Dictionary<string, User>();
 
 //change it so instead of using the boolean vairable, uses classes instead and returns the users class that has logged in, removing the else if
 bool isStaff = false;
+List<string> checkBox = new List<string>();
+User currentUser = new User("user one", "emailll", "passwords", "a random date", false, checkBox);//this is so the program can run
 while (true)
 {
-    Console.Write("Username: ");
-    string uName = Console.ReadLine().Trim();
+    Console.Write("Email: ");
+    string email = Console.ReadLine().Trim();
 
     Console.Write("Password: ");
     string password = Console.ReadLine().Trim();
 
-    if (uName.ToLower() == "admin" && password.ToLower() == "password")//placeholder for now
+    if (email.ToLower() == "admin" && password.ToLower() == "password")//placeholder for now
     {
         isStaff = true;
         break;
     }
-    else if(uName.ToLower() == "user" && password.ToLower() == "password")
+    else if(email.ToLower() == "user" && password.ToLower() == "password")
     {
         break;
     }
@@ -205,7 +203,6 @@ if (isStaff)
 else
 {
     bool exit = false;
-    User currentUser = 
 
     while (!exit)
     {
@@ -220,7 +217,22 @@ else
             case "2":
                 break;
             case "3":
-                List<string> rentHistory = ;
+                List<string> rentHistory = currentUser.GetRentHistory();
+                if(rentHistory.Count != 0)
+                {
+                    foreach (string vehicle in rentHistory)
+                    {
+                        if (cars.ContainsKey(vehicle))
+                        {
+                            Console.WriteLine($"{cars[vehicle].GetMake()} {cars[vehicle].GetModel()}--{vehicle}");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.Write("No vehicle has been rented in the past");
+                    Task.Delay(1500).Wait();
+                }
                 break;
             case "4":
                 break;
