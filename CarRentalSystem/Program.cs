@@ -36,9 +36,9 @@ while (true)
 }
 
 Console.Clear();
-Console.WriteLine($"Welcome back "); //once classes are properly implemented will output the users name
+Console.Write($"Welcome back {currentUser.GetName()}");
 
-Task.Delay(1500).Wait();
+Task.Delay(750).Wait();
 
 if (isStaff)
 {
