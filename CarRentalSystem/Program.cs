@@ -48,7 +48,7 @@ if (isStaff)
     while (!exit)
     {
         Console.Clear();
-        Console.WriteLine("MENU \n1)Add a new vehicle \n2)Remove a vehicle \n3)Add a new user \n4)Remove a user \n5)Currently rented vehicles \n6)Available vehicles \n7)Close program");
+        Console.WriteLine("MENU \n1)Add a new vehicle \n2)Remove a vehicle \n3)Add a new user \n4)Remove a user \n5) \n6)Available vehicles \n7)Close program");
         string userOption = Console.ReadLine().Trim();
         Console.Clear();
         switch (userOption) 
@@ -198,17 +198,10 @@ if (isStaff)
                 }
                 break;
             case "5":
-                GetAvailableVehicles();
+                
                 break;
             case "6":
-                foreach (KeyValuePair<string, Car> kvp in cars)
-                {
-                    if (cars[kvp.Key].GetAvailability())
-                    {
-                        Console.WriteLine(kvp.Key);
-                    }
-                }
-                Task.Delay(5000).Wait();
+                GetAvailableVehicles();
                 break;
             case "7":
                 exit = true;
