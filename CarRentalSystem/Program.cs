@@ -35,6 +35,8 @@ while (true)
     }
 }
 
+string date = (new DateOnly(2024,11,13)).ToString();
+
 Console.Clear();
 Console.Write($"Welcome back {currentUser.GetName()}");
 
@@ -124,8 +126,20 @@ if (isStaff)
                 string email = Console.ReadLine();
                 Console.Write("Password: ");
                 string password = Console.ReadLine();
-                Console.Write("Date of birth: ");
-                string dob = Console.ReadLine();
+                string dob;
+                while (true)
+                {
+                    Console.Write("Date of birth(DD/MM/YYYY): ");
+                    dob = Console.ReadLine();
+                    if (dob.Length< 10 && dob[2] == '/' && dob[5] == '/')
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("INCORRECT INPUT! \nPlease make sure you are entering the date in the correct format (DD/MM/YYYY)");
+                    }
+                }
                 bool staffCheck;
                 while (true)
                 {
