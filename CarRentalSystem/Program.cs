@@ -198,14 +198,7 @@ if (isStaff)
                 }
                 break;
             case "5":
-                foreach(KeyValuePair<string, Car> kvp in cars)
-                {
-                    if (!cars[kvp.Key].GetAvailability())
-                    {
-                        Console.WriteLine(kvp.Key);
-                    }
-                }
-                Task.Delay(5000).Wait();
+                GetAvailableVehicles();
                 break;
             case "6":
                 foreach (KeyValuePair<string, Car> kvp in cars)
@@ -245,6 +238,7 @@ else
             case "1":
                 break;
             case "2":
+                GetAvailableVehicles();
                 break;
             case "3":
                 List<string> rentHistory = currentUser.GetRentHistory();
@@ -277,3 +271,16 @@ else
 }
 
 Console.WriteLine("PROGRAM ENDED \nSEE YOU LATER :)");
+
+
+void GetAvailableVehicles()
+{
+    foreach (KeyValuePair<string, Car> kvp in cars)
+    {
+        if (cars[kvp.Key].GetAvailability())
+        {
+            Console.WriteLine($"{cars[kvp.Key].GetMake} {cars[kvp.Key].GetModel}--{kvp.Key}");
+        }
+    }
+    Task.Delay(5000).Wait();
+}
