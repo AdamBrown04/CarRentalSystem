@@ -4,6 +4,10 @@ using System.Globalization;
 Dictionary<string, Car>cars = new Dictionary<string, Car>();
 Dictionary<string, User>users = new Dictionary<string, User>();
 
+FileStream carsFile = File.Open("cars.dat", FileMode.Open);
+BinaryReader carsReader = new BinaryReader(carsFile);
+FileStream usersFile = File.Open("users", FileMode.Open);
+BinaryReader usersReader = new BinaryReader(usersFile);
 
 
 //change it so instead of using the boolean vairable, uses classes instead and returns the users class that has logged in, removing the else if
@@ -262,6 +266,11 @@ else
         }
     }
 }
+
+carsFile.Close();
+usersFile.Close();
+carsReader.Close();
+usersReader.Close();
 
 Console.WriteLine("PROGRAM ENDED \nSEE YOU LATER :)");
 
