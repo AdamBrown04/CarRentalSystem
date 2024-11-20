@@ -5,7 +5,6 @@ Dictionary<string, Car>cars = new Dictionary<string, Car>();
 Dictionary<string, User>users = new Dictionary<string, User>();
 
 FileStream carsFile = File.Open("cars.dat", FileMode.OpenOrCreate);
-FileStream usersFile = File.Open("users.dat", FileMode.OpenOrCreate);
 
 BinaryReader carsReader = new BinaryReader(carsFile);
 while (carsReader.BaseStream.Position < carsReader.BaseStream.Length)
@@ -14,9 +13,9 @@ while (carsReader.BaseStream.Position < carsReader.BaseStream.Length)
     cars.Add(addCar.GetNumberPlate(), addCar);
 }
 
-/*
-use these when needing a reader
 
+/*
+FileStream usersFile = File.Open("users.dat", FileMode.OpenOrCreate);
 BinaryReader usersReader = new BinaryReader(usersFile);
 */
 
@@ -285,9 +284,8 @@ else
         }
     }
 }
-
+carsReader.Close();
 carsFile.Close();
-usersFile.Close();
 
 Console.WriteLine("PROGRAM ENDED \nSEE YOU LATER :)");
 
