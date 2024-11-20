@@ -3,18 +3,10 @@ using System.Globalization;
 
 Dictionary<string, Car>cars = new Dictionary<string, Car>();
 Dictionary<string, User>users = new Dictionary<string, User>();
-string cPath = "cars.dat";
-if (File.Exists(cPath))
-{
-    FileStream carsFile = File.Open("cars.dat", FileMode.Open);
-}
-else
-{
-    FileStream carsFile = File.Create(cPath);
-}
 
+FileStream carsFile = File.Open("cars.dat", FileMode.OpenOrCreate);
 BinaryReader carsReader = new BinaryReader(carsFile);
-FileStream usersFile = File.Open("users.dat", FileMode.Open);
+FileStream usersFile = File.Open("users.dat", FileMode.OpenOrCreate);
 BinaryReader usersReader = new BinaryReader(usersFile);
 
 
