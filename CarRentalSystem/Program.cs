@@ -5,20 +5,14 @@ Dictionary<string, Car>cars = new Dictionary<string, Car>();
 Dictionary<string, User>users = new Dictionary<string, User>();
 
 FileStream carsFile = File.Open("cars.dat", FileMode.OpenOrCreate);
-
+FileStream usersFile = File.Open("users.dat", FileMode.OpenOrCreate);
+//BinaryReader usersReader = new BinaryReader(usersFile);
 BinaryReader carsReader = new BinaryReader(carsFile);
 while (carsReader.BaseStream.Position < carsReader.BaseStream.Length)
 {
     Car addCar = new Car(carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadSingle(),carsReader.ReadBoolean());
     cars.Add(addCar.GetNumberPlate(), addCar);
 }
-
-
-/*
-FileStream usersFile = File.Open("users.dat", FileMode.OpenOrCreate);
-BinaryReader usersReader = new BinaryReader(usersFile);
-*/
-
 
 //change it so instead of using the boolean vairable, uses classes instead and returns the users class that has logged in, removing the else if
 bool isStaff = false;
@@ -141,19 +135,23 @@ if (isStaff)
                 }
                 break;
             case "3":
+                BinaryWriter usersWriter = new BinaryWriter(usersFile);
                 Console.WriteLine("Enter persons information");
                 Console.Write("Name: ");
                 string name = Console.ReadLine();
+                usersWriter.Write(name);
                 Console.Write("Email: ");
                 string email = Console.ReadLine();
+                usersWriter.Write(email);
                 Console.Write("Password: ");
                 string password = Console.ReadLine();
+                usersWriter.Write(password);
                 string dob;
                 while (true)
                 {
                     Console.Write("Date of birth(DD/MM/YYYY): ");
                     dob = Console.ReadLine();
-                    if (dob.Length< 10 && dob[2] == '/' && dob[5] == '/')
+                    if (dob.Length< 11 && dob[2] == '/' && dob[5] == '/')
                     {
                         break;
                     }
@@ -162,6 +160,7 @@ if (isStaff)
                         Console.WriteLine("INCORRECT INPUT! \nPlease make sure you are entering the date in the correct format (DD/MM/YYYY)");
                     }
                 }
+                usersWriter.Write(dob);
                 bool staffCheck;
                 while (true)
                 {
@@ -182,7 +181,9 @@ if (isStaff)
                         Console.WriteLine("Invalid option, please enter either true or false");
                     }
                 }
+                usersWriter.Write(staffCheck);
                 List<string> previousRents = new List<string>();
+                usersWriter.Write("");
                 User newUser = new User(name, email, password, dob, staffCheck, previousRents);
                 users.Add(email, newUser);
                 break;
