@@ -11,6 +11,7 @@ BinaryReader carsReader = new BinaryReader(carsFile);
 while (carsReader.BaseStream.Position < carsReader.BaseStream.Length)
 {
     Car addCar = new Car(carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadSingle(),carsReader.ReadBoolean());
+    cars.Add(addCar.GetNumberPlate(), addCar);
 }
 
 /*
