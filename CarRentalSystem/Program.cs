@@ -5,9 +5,19 @@ Dictionary<string, Car>cars = new Dictionary<string, Car>();
 Dictionary<string, User>users = new Dictionary<string, User>();
 
 FileStream carsFile = File.Open("cars.dat", FileMode.OpenOrCreate);
-BinaryReader carsReader = new BinaryReader(carsFile);
 FileStream usersFile = File.Open("users.dat", FileMode.OpenOrCreate);
+
+BinaryReader carsReader = new BinaryReader(carsFile);
+while (carsReader.BaseStream.Position < carsReader.BaseStream.Length)
+{
+    Car addCar = new Car(carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadSingle(),carsReader.ReadBoolean());
+}
+
+/*
+use these when needing a reader
+
 BinaryReader usersReader = new BinaryReader(usersFile);
+*/
 
 
 //change it so instead of using the boolean vairable, uses classes instead and returns the users class that has logged in, removing the else if
@@ -58,19 +68,27 @@ if (isStaff)
         switch (userOption) 
         {
             case "1":
+                BinaryWriter carWriter = new BinaryWriter(carsFile);
                 Console.WriteLine("Enter vehicle details");
                 Console.Write("Make: ");
                 string make = Console.ReadLine();
+                carWriter.Write(make);
                 Console.Write("Model: ");
                 string model = Console.ReadLine();
+                carWriter.Write(model);
                 Console.Write("Year of manufacture: ");
                 string yom = Console.ReadLine();
+                carWriter.Write(yom);
                 Console.Write("Number plate: ");
                 string numberPlate = Console.ReadLine();
+                carWriter.Write(numberPlate);
                 Console.Write("Body type: ");
                 string bodyType = Console.ReadLine();
+                carWriter.Write(bodyType);
                 Console.Write("Cost to rent: ");
                 float costToRent = Convert.ToSingle(Console.ReadLine());
+                carWriter.Write(costToRent);
+                carWriter.Write(true);
                 Car newCar = new Car(make, model, yom, numberPlate, bodyType, costToRent, true);
                 cars.Add(numberPlate, newCar);
                 break;
@@ -269,11 +287,8 @@ else
 
 carsFile.Close();
 usersFile.Close();
-carsReader.Close();
-usersReader.Close();
 
 Console.WriteLine("PROGRAM ENDED \nSEE YOU LATER :)");
-
 
 void GetAvailableVehicles()
 {
