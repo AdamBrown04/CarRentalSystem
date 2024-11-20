@@ -297,7 +297,7 @@ void GetAvailableVehicles()
     {
         if (cars[kvp.Key].GetAvailability())
         {
-            Console.WriteLine($"{cars[kvp.Key].GetMake} {cars[kvp.Key].GetModel}--{kvp.Key}");
+            Console.WriteLine($"{cars[kvp.Key].GetMake()} {cars[kvp.Key].GetModel()}--{kvp.Key}");
         }
     }
     Task.Delay(5000).Wait();
