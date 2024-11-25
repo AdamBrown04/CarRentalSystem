@@ -14,10 +14,17 @@ while (carsReader.BaseStream.Position < carsReader.BaseStream.Length)
     cars.Add(addCar.GetNumberPlate(), addCar);
 }
 
+BinaryReader usersReader = new BinaryReader(usersFile);
+while(usersReader.BaseStream.Position < usersReader.BaseStream.Length)
+{
+    User addUser = new User(carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadBoolean());
+    addUser.GetRentListFromString(usersReader.ReadString());
+    users.Add(addUser.GetEmail(), addUser);
+}
+
 //change it so instead of using the boolean vairable, uses classes instead and returns the users class that has logged in, removing the else if
 bool isStaff = false;
-List<string> checkBox = new List<string>();
-User currentUser = new User("user one", "emailll", "passwords", "a random date", false, checkBox);//this is so the program can run
+User currentUser = new User("user one", "emailll", "passwords", "a random date", false);//this is so the program can run
 while (true)
 {
     Console.Write("Email: ");
@@ -181,10 +188,8 @@ if (isStaff)
                     }
                 }
                 usersWriter.Write(staffCheck);
-                List<string> previousRents = new List<string>();
-                usersWriter.Write("");
                 usersWriter.Flush();
-                User newUser = new User(name, email, password, dob, staffCheck, previousRents);
+                User newUser = new User(name, email, password, dob, staffCheck);
                 users.Add(email, newUser);
                 break;
             case "4":

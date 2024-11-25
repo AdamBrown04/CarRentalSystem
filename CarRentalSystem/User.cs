@@ -17,7 +17,7 @@ namespace CarRentalSystem
         private bool isStaff;
         private List<string> rentHistory = new List<string>();
         //constructor
-        public User(string name, string email, string password, string DoB, bool isStaff, List<string> rentalHistory)
+        public User(string name, string email, string password, string DoB, bool isStaff)
         {
             string[] names = name.Split(" ");
             fName = names[0];
@@ -26,7 +26,6 @@ namespace CarRentalSystem
             this.password = password;
             dob = DoB;
             this.isStaff = isStaff;
-            rentHistory = rentalHistory;
         }
         //Get operations
         public string GetName()
@@ -52,6 +51,22 @@ namespace CarRentalSystem
         public List<string> GetRentHistory()
         {
             return rentHistory;
+        }
+
+        public string GetRentString()
+        {
+            string rentString = "";
+            foreach (string rent in rentHistory)
+            {
+                rentString += rent + ",";
+            }
+            return rentString;
+        }
+
+        public List<string> GetRentListFromString(string rentString)
+        {
+            List<string> rentalHistory = rentString.Split(",").ToList();
+            return rentalHistory;
         }
     }
 }
