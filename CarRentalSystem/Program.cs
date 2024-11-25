@@ -43,8 +43,6 @@ while (true)
     }
 }
 
-string date = (new DateOnly(2024,11,13)).ToString();
-
 Console.Clear();
 Console.Write($"Welcome back {currentUser.GetName()}");
 
@@ -83,6 +81,7 @@ if (isStaff)
                 float costToRent = Convert.ToSingle(Console.ReadLine());
                 carWriter.Write(costToRent);
                 carWriter.Write(true);
+                carWriter.Flush();
                 Car newCar = new Car(make, model, yom, numberPlate, bodyType, costToRent, true);
                 cars.Add(numberPlate, newCar);
                 break;
@@ -184,6 +183,7 @@ if (isStaff)
                 usersWriter.Write(staffCheck);
                 List<string> previousRents = new List<string>();
                 usersWriter.Write("");
+                usersWriter.Flush();
                 User newUser = new User(name, email, password, dob, staffCheck, previousRents);
                 users.Add(email, newUser);
                 break;
