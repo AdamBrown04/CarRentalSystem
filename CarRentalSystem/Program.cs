@@ -18,7 +18,7 @@ BinaryReader usersReader = new BinaryReader(usersFile);
 while(usersReader.BaseStream.Position < usersReader.BaseStream.Length)
 {
     User addUser = new User(usersReader.ReadString(), usersReader.ReadString(), usersReader.ReadString(), usersReader.ReadString(), usersReader.ReadBoolean());
-    //addUser.GetRentListFromString(usersReader.ReadString());
+    //addUser.GetRentListFromString(usersReader.ReadString()); not sure how I want to implement this yet
     users.Add(addUser.GetEmail(), addUser);
 }
 
@@ -67,30 +67,22 @@ if (isStaff)
         switch (userOption) 
         {
             case "1":
-                BinaryWriter carWriter = new BinaryWriter(carsFile);
                 Console.WriteLine("Enter vehicle details");
                 Console.Write("Make: ");
                 string make = Console.ReadLine();
-                carWriter.Write(make);
                 Console.Write("Model: ");
                 string model = Console.ReadLine();
-                carWriter.Write(model);
                 Console.Write("Year of manufacture: ");
                 string yom = Console.ReadLine();
-                carWriter.Write(yom);
                 Console.Write("Number plate: ");
                 string numberPlate = Console.ReadLine();
-                carWriter.Write(numberPlate);
                 Console.Write("Body type: ");
                 string bodyType = Console.ReadLine();
-                carWriter.Write(bodyType);
                 Console.Write("Cost to rent: ");
                 float costToRent = Convert.ToSingle(Console.ReadLine());
-                carWriter.Write(costToRent);
-                carWriter.Write(true);
-                carWriter.Flush();
                 Car newCar = new Car(make, model, yom, numberPlate, bodyType, costToRent, true);
                 cars.Add(numberPlate, newCar);
+                newCar.AddToFile(carsFile);
                 break;
             case "2":
                 Console.Write("Enter number plate of vehicle you want to remove: ");

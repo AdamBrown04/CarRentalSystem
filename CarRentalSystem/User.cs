@@ -69,7 +69,7 @@ namespace CarRentalSystem
             return rentalHistory;
         }
 
-        public void AddToFile(FileStream file)
+        public void AddToFile(FileStream file) //add user to file
         {
             BinaryWriter bw = new BinaryWriter(file);
             bw.Write(fName + " " + lName);

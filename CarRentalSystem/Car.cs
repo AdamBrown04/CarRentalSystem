@@ -66,5 +66,17 @@ namespace CarRentalSystem
         {
             emailOfCurrentRenter = email;
         }
+
+        public void AddToFile(FileStream file)
+        {
+            BinaryWriter bw = new BinaryWriter(file);
+            bw.Write(make);
+            bw.Write(model);
+            bw.Write(yearOfManufacture);
+            bw.Write(numberPlate);
+            bw.Write(bodyType);
+            bw.Write(costToRent);
+            bw.Write(isAvailable);
+        }
     }
 }
