@@ -17,8 +17,8 @@ while (carsReader.BaseStream.Position < carsReader.BaseStream.Length)
 BinaryReader usersReader = new BinaryReader(usersFile);
 while(usersReader.BaseStream.Position < usersReader.BaseStream.Length)
 {
-    User addUser = new User(carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadBoolean());
-    addUser.GetRentListFromString(usersReader.ReadString());
+    User addUser = new User(usersReader.ReadString(), usersReader.ReadString(), usersReader.ReadString(), usersReader.ReadString(), usersReader.ReadBoolean());
+    //addUser.GetRentListFromString(usersReader.ReadString());
     users.Add(addUser.GetEmail(), addUser);
 }
 
@@ -141,17 +141,13 @@ if (isStaff)
                 }
                 break;
             case "3":
-                BinaryWriter usersWriter = new BinaryWriter(usersFile);
                 Console.WriteLine("Enter persons information");
                 Console.Write("Name: ");
                 string name = Console.ReadLine();
-                usersWriter.Write(name);
                 Console.Write("Email: ");
                 string email = Console.ReadLine();
-                usersWriter.Write(email);
                 Console.Write("Password: ");
                 string password = Console.ReadLine();
-                usersWriter.Write(password);
                 string dob;
                 while (true)
                 {
@@ -166,7 +162,6 @@ if (isStaff)
                         Console.WriteLine("INCORRECT INPUT! \nPlease make sure you are entering the date in the correct format (DD/MM/YYYY)");
                     }
                 }
-                usersWriter.Write(dob);
                 bool staffCheck;
                 while (true)
                 {
@@ -187,10 +182,9 @@ if (isStaff)
                         Console.WriteLine("Invalid option, please enter either true or false");
                     }
                 }
-                usersWriter.Write(staffCheck);
-                usersWriter.Flush();
                 User newUser = new User(name, email, password, dob, staffCheck);
                 users.Add(email, newUser);
+                newUser.AddToFile(usersFile);
                 break;
             case "4":
                 Console.Write("Enter email of user you wish to remove: ");

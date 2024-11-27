@@ -68,5 +68,17 @@ namespace CarRentalSystem
             List<string> rentalHistory = rentString.Split(",").ToList();
             return rentalHistory;
         }
+
+        public void AddToFile(FileStream file)
+        {
+            BinaryWriter bw = new BinaryWriter(file);
+            bw.Write(fName + " " + lName);
+            bw.Write(email);
+            bw.Write(password);
+            bw.Write(dob);
+            bw.Write(isStaff);
+            bw.Write(GetRentString());
+            bw.Flush();
+        }
     }
 }
