@@ -292,12 +292,12 @@ Console.WriteLine("PROGRAM ENDED \nSEE YOU LATER :)");
 
 void GetAvailableVehicles()
 {
-    foreach (KeyValuePair<string, Car> kvp in cars)
+    Parallel.ForEach(cars, (kvp, state) =>
     {
         if (cars[kvp.Key].GetAvailability())
         {
             Console.WriteLine($"{cars[kvp.Key].GetMake()} {cars[kvp.Key].GetModel()}--{kvp.Key}");
         }
-    }
+    });
     Task.Delay(5000).Wait();
 }
