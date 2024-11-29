@@ -6,7 +6,7 @@ Dictionary<string, User>users = new Dictionary<string, User>();
 
 FileStream carsFile = File.Open("cars.dat", FileMode.OpenOrCreate);
 FileStream usersFile = File.Open("users.dat", FileMode.OpenOrCreate);
-//BinaryReader usersReader = new BinaryReader(usersFile);
+
 BinaryReader carsReader = new BinaryReader(carsFile);
 while (carsReader.BaseStream.Position < carsReader.BaseStream.Length)
 {
@@ -22,10 +22,11 @@ while(usersReader.BaseStream.Position < usersReader.BaseStream.Length)
     users.Add(addUser.GetEmail(), addUser);
 }
 
-//change it so instead of using the boolean vairable, uses classes instead and returns the users class that has logged in, removing the else if
-bool isStaff = false;
-User currentUser = new User("user one", "emailll", "passwords", "a random date", false);//this is so the program can run
-while (true)
+
+User currentUser = null; //set as null to prevent an error on line 59, don't understand why it's needed but it works
+bool found = false;
+
+while (!found)
 {
     Console.Write("Email: ");
     string email = Console.ReadLine().Trim();
@@ -33,29 +34,36 @@ while (true)
     Console.Write("Password: ");
     string password = Console.ReadLine().Trim();
 
-    if (email.ToLower() == "admin" && password.ToLower() == "password")//placeholder for now
+    bool searchComplete = false;
+
+    foreach (KeyValuePair<string, User> kvp in users)
     {
-        isStaff = true;
-        break;
+        if (kvp.Key == email && users[kvp.Key].GetPassword() == password)
+        {
+            currentUser = users[kvp.Key];
+            searchComplete = true;
+            found = true;
+            break;
+        }
     }
-    else if(email.ToLower() == "user" && password.ToLower() == "password")
+    if (!searchComplete)
     {
-        break;
+            Console.WriteLine("USER DOES NOT EXIST/PASSWORD IS INCORRECT");
+            Task.Delay(1500).Wait();
+            Console.Clear();
     }
     else
     {
-        Console.WriteLine("USER DOES NOT EXIST/PASSWORD IS INCORRECT");
-        Task.Delay(1500).Wait();
+
         Console.Clear();
+        Console.Write($"Welcome back {currentUser.GetName()}");
+
+        Task.Delay(750).Wait();
     }
 }
 
-Console.Clear();
-Console.Write($"Welcome back {currentUser.GetName()}");
 
-Task.Delay(750).Wait();
-
-if (isStaff)
+if (currentUser.GetIsStaff())
 {
     bool exit = false;
     while (!exit)
