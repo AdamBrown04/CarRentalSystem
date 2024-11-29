@@ -35,17 +35,18 @@ while (!found)
     string password = Console.ReadLine().Trim();
 
     bool searchComplete = false;
-
-    foreach (KeyValuePair<string, User> kvp in users)
+    //using parallel.foreach as it allows better scalability of the program over foreach
+    Parallel.ForEach(users, (kvp, state) =>
     {
         if (kvp.Key == email && users[kvp.Key].GetPassword() == password)
         {
             currentUser = users[kvp.Key];
             searchComplete = true;
             found = true;
-            break;
+            state.Break();
         }
-    }
+    });
+
     if (!searchComplete)
     {
             Console.WriteLine("USER DOES NOT EXIST/PASSWORD IS INCORRECT");
