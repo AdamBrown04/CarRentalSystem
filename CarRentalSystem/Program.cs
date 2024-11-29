@@ -260,13 +260,13 @@ else
                 List<string> rentHistory = currentUser.GetRentHistory();
                 if(rentHistory.Count != 0)
                 {
-                    foreach (string vehicle in rentHistory)
+                    Parallel.ForEach(rentHistory, vehicle =>
                     {
                         if (cars.ContainsKey(vehicle))
                         {
                             Console.WriteLine($"{cars[vehicle].GetMake()} {cars[vehicle].GetModel()}--{vehicle}");
                         }
-                    }
+                    });
                 }
                 else
                 {
