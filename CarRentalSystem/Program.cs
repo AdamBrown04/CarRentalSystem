@@ -286,6 +286,7 @@ else
                         Console.WriteLine("Vehicle has been rented");
                         Task.Delay(1500).Wait();
                         Console.Clear();
+                        //need to add file updating
                     }
                     else
                     {
