@@ -66,6 +66,10 @@ namespace CarRentalSystem
         {
             emailOfCurrentRenter = email;
         }
+        public void SetAvailability(bool availability)
+        {
+            isAvailable = availability;
+        }
 
         public void AddToFile(FileStream file)
         {

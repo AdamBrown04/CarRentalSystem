@@ -246,12 +246,59 @@ else
     while (!exit)
     {
         Console.Clear();
-        Console.WriteLine("MENU \n1)Rent a vehicle \n2)View available vehicles \n3)View previously rented vehicles \n4)Return currently rented car \n5)Exit program");
+        Console.WriteLine("MENU \n1)Rent a vehicle \n2)View available vehicles \n3)View previously rented vehicles \n4) \n5)Exit program");
         string userOption = Console.ReadLine().Trim();
         Console.Clear();
         switch (userOption)
         {
             case "1":
+                Console.WriteLine("Enter number plate of vehicle you want to rent: ");
+                GetAvailableVehicles();
+                Console.Write("");
+                string regPlateToRent = Console.ReadLine();
+                if (cars.ContainsKey(regPlateToRent))
+                {
+                    int daysRenting = 0;
+                    while (true)
+                    {
+                        Console.Write("Enter the number of days you want to rent the vehicle for: ");
+                        daysRenting = Convert.ToInt32(Console.ReadLine());
+                        if (daysRenting < 1)
+                        {
+                            Console.WriteLine("Invalid input, cannot rent for less then a day");
+                            Task.Delay(1500).Wait();
+                            Console.Clear();
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    int totalCost = daysRenting * Convert.ToInt32(cars[regPlateToRent].GetCostToRent());
+                    Console.Write($"The total cost of renting {regPlateToRent} for {daysRenting} days is £{totalCost} " +
+                        $"\nDo you want to continue(Y/N)");
+                    string option = Console.ReadLine().ToUpper();
+                    if(option == "Y")
+                    {
+                        cars[regPlateToRent].SetEmailOfCurrentRenter(currentUser.GetEmail());
+                        cars[regPlateToRent].SetAvailability(false);
+                        users[currentUser.GetEmail()].AddToRentHistory(regPlateToRent);
+                        Console.WriteLine("Vehicle has been rented");
+                        Task.Delay(1500).Wait();
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Process has been terminated");
+                        Task.Delay(1500).Wait();
+                        Console.Clear();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("This vehicle does not exist");
+                    Task.Delay(1500).Wait();
+                }
                 break;
             case "2":
                 GetAvailableVehicles();
@@ -275,6 +322,7 @@ else
                 }
                 break;
             case "4":
+
                 break;
             case "5":
                 exit = true;
@@ -296,7 +344,7 @@ void GetAvailableVehicles()
     {
         if (cars[kvp.Key].GetAvailability())
         {
-            Console.WriteLine($"{cars[kvp.Key].GetMake()} {cars[kvp.Key].GetModel()}--{kvp.Key}");
+            Console.WriteLine($"{cars[kvp.Key].GetMake()} {cars[kvp.Key].GetModel()}--{kvp.Key}--£{cars[kvp.Key].GetCostToRent()}/day");
         }
     });
     Task.Delay(5000).Wait();

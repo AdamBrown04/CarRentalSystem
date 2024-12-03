@@ -53,6 +53,11 @@ namespace CarRentalSystem
             return rentHistory;
         }
 
+        public void AddToRentHistory(string vehicleRegPlate)
+        {
+            rentHistory.Add(vehicleRegPlate);
+        }
+
         public string GetRentString()
         {
             string rentString = "";
