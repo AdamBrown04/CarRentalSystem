@@ -84,7 +84,7 @@ if (currentUser.GetIsStaff())
                 Console.Write("Year of manufacture: ");
                 string yom = Console.ReadLine();
                 Console.Write("Number plate: ");
-                string numberPlate = Console.ReadLine();
+                string numberPlate = Console.ReadLine().ToUpper();
                 Console.Write("Body type: ");
                 string bodyType = Console.ReadLine();
                 Console.Write("Cost to rent: ");
@@ -203,6 +203,7 @@ if (currentUser.GetIsStaff())
                             Console.WriteLine($"{emailToRemove} has been removed");
                             Task.Delay(1500).Wait();
                             break;
+                            //remove from file
                         }
                         else if (confirmation == "N")
                         {
@@ -221,10 +222,29 @@ if (currentUser.GetIsStaff())
                 }
                 break;
             case "5":
-                //use parallel.foreach to display all vehicles that are currently rented with email of renter, get user to input email, confirm, remove current renter from instance
+                //use parallel.foreach to display all vehicles that are currently rented with email of renter,
+                //get user to input email, confirm, remove current renter from instance
+                Parallel.ForEach(cars, (kvp, state) =>
+                {
+                    if (!cars[kvp.Key].GetAvailability())
+                    {
+                        Console.WriteLine($"Number plate:{kvp.Key} Email:{cars[kvp.Key].GetEmailOfCurrentRenter()}");
+                    }
+                });
+                Console.Write("Enter number plate of the vehicle for person you want to remove: ");
+                string numberPlateForEmail = Console.ReadLine();
+                if (cars.ContainsKey(numberPlateForEmail))
+                {
+
+                }
+                else
+                {
+                    Console.WriteLine("This vehicle does not exist");
+                    Task.Delay(1500).Wait();
+                }
                 break;
             case "6":
-                GetAvailableVehicles();
+                GetAvailableVehicles(5000);
                 break;
             case "7":
                 exit = true;
@@ -252,10 +272,10 @@ else
         switch (userOption)
         {
             case "1":
+                GetAvailableVehicles(100);
                 Console.WriteLine("Enter number plate of vehicle you want to rent: ");
-                GetAvailableVehicles();
-                Console.Write("");
-                string regPlateToRent = Console.ReadLine();
+                string regPlateToRent = Console.ReadLine().ToUpper();
+
                 if (cars.ContainsKey(regPlateToRent) && cars[regPlateToRent].GetAvailability())
                 {
                     int daysRenting = 0;
@@ -302,7 +322,7 @@ else
                 }
                 break;
             case "2":
-                GetAvailableVehicles();
+                GetAvailableVehicles(5000);
                 break;
             case "3":
                 List<string> rentHistory = currentUser.GetRentHistory();
@@ -339,7 +359,7 @@ carsFile.Close();
 
 Console.WriteLine("PROGRAM ENDED \nSEE YOU LATER :)");
 
-void GetAvailableVehicles()
+void GetAvailableVehicles(int timeDelay)
 {
     Parallel.ForEach(cars, (kvp, state) =>
     {
@@ -348,5 +368,5 @@ void GetAvailableVehicles()
             Console.WriteLine($"{cars[kvp.Key].GetMake()} {cars[kvp.Key].GetModel()}--{kvp.Key}--£{cars[kvp.Key].GetCostToRent()}/day");
         }
     });
-    Task.Delay(5000).Wait();
+    Task.Delay(timeDelay).Wait();
 }
