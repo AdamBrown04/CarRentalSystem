@@ -154,7 +154,7 @@ if (currentUser.GetIsStaff())
                 {
                     Console.Write("Date of birth(DD/MM/YYYY): ");
                     dob = Console.ReadLine();
-                    if (dob.Length< 11 && dob[2] == '/' && dob[5] == '/')
+                    if (dob.Length == 10 && dob[2] == '/' && dob[5] == '/')
                     {
                         break;
                     }
