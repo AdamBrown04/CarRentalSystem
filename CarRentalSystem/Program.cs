@@ -256,7 +256,7 @@ else
                 GetAvailableVehicles();
                 Console.Write("");
                 string regPlateToRent = Console.ReadLine();
-                if (cars.ContainsKey(regPlateToRent))
+                if (cars.ContainsKey(regPlateToRent) && cars[regPlateToRent].GetAvailability())
                 {
                     int daysRenting = 0;
                     while (true)
@@ -297,7 +297,7 @@ else
                 }
                 else
                 {
-                    Console.WriteLine("This vehicle does not exist");
+                    Console.WriteLine("This vehicle does not exist or it is currently being rented");
                     Task.Delay(1500).Wait();
                 }
                 break;

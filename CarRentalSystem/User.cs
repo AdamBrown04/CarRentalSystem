@@ -82,7 +82,7 @@ namespace CarRentalSystem
             bw.Write(password);
             bw.Write(dob);
             bw.Write(isStaff);
-            bw.Write(GetRentString());
+            //bw.Write(GetRentString());
             bw.Flush();
         }
     }
