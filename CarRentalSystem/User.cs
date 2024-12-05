@@ -63,17 +63,20 @@ namespace CarRentalSystem
             string rentString = "";
             foreach (string rent in rentHistory)
             {
-                rentString += rent + ",";
+                rentString += rent + ";";
             }
             return rentString;
         }
 
         public List<string> GetRentListFromString(string rentString)
         {
-            List<string> rentalHistory = rentString.Split(",").ToList();
+            List<string> rentalHistory = rentString.Split(";").ToList();
             return rentalHistory;
         }
-
+        public void SetRentHistory(List<string> rentalHistory)
+        {
+            rentHistory = rentalHistory;
+        }
         public void AddToFile(FileStream file) //add user to file
         {
             BinaryWriter bw = new BinaryWriter(file);
@@ -82,7 +85,7 @@ namespace CarRentalSystem
             bw.Write(password);
             bw.Write(dob);
             bw.Write(isStaff);
-            //bw.Write(GetRentString());
+            bw.Write(GetRentString());
             bw.Flush();
         }
     }

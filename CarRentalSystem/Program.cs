@@ -18,7 +18,7 @@ BinaryReader usersReader = new BinaryReader(usersFile);
 while(usersReader.BaseStream.Position < usersReader.BaseStream.Length)
 {
     User addUser = new User(usersReader.ReadString(), usersReader.ReadString(), usersReader.ReadString(), usersReader.ReadString(), usersReader.ReadBoolean());
-    //addUser.GetRentListFromString(usersReader.ReadString()); not sure how I want to implement this yet
+    addUser.GetRentListFromString(usersReader.ReadString());
     users.Add(addUser.GetEmail(), addUser);
 }
 
@@ -183,7 +183,10 @@ if (currentUser.GetIsStaff())
                         Console.WriteLine("Invalid option, please enter either true or false");
                     }
                 }
+                List<string> RentalHistory = new List<string>();
+                RentalHistory.Add(";");
                 User newUser = new User(name, email, password, dob, staffCheck);
+                newUser.SetRentHistory(RentalHistory);
                 users.Add(email, newUser);
                 newUser.AddToFile(usersFile);
                 break;
