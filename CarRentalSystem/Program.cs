@@ -222,8 +222,6 @@ if (currentUser.GetIsStaff())
                 }
                 break;
             case "5":
-                //use parallel.foreach to display all vehicles that are currently rented with email of renter,
-                //get user to input email, confirm, remove current renter from instance
                 Parallel.ForEach(cars, (kvp, state) =>
                 {
                     if (!cars[kvp.Key].GetAvailability())
@@ -235,7 +233,10 @@ if (currentUser.GetIsStaff())
                 string numberPlateForEmail = Console.ReadLine();
                 if (cars.ContainsKey(numberPlateForEmail))
                 {
-
+                    cars[numberPlateForEmail].SetEmailOfCurrentRenter("");
+                    cars[numberPlateForEmail].SetAvailability(true);
+                    Console.WriteLine("Person has been removed from the vehicle");
+                    Task.Delay(1500).Wait();
                 }
                 else
                 {
