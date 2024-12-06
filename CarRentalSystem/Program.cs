@@ -11,6 +11,10 @@ BinaryReader carsReader = new BinaryReader(carsFile);
 while (carsReader.BaseStream.Position < carsReader.BaseStream.Length)
 {
     Car addCar = new Car(carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadSingle(),carsReader.ReadBoolean());
+    if(carsReader.ReadString() != "unavailable")
+    {
+        addCar.SetEmailOfCurrentRenter(carsReader.ReadString());
+    }
     cars.Add(addCar.GetNumberPlate(), addCar);
 }
 

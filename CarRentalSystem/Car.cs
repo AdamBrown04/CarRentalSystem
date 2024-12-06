@@ -16,7 +16,7 @@ namespace CarRentalSystem
         private string bodyType;
         private float costToRent;
         private bool isAvailable;
-        private string emailOfCurrentRenter;
+        private string emailOfCurrentRenter = "unavailable";
         //constructor
         public Car(string make, string model, string yearOfManufacture, string numberPlate, string bodyType, float costToRent, bool isAvailable)
         {
@@ -81,6 +81,7 @@ namespace CarRentalSystem
             bw.Write(bodyType);
             bw.Write(costToRent);
             bw.Write(isAvailable);
+            bw.Write(emailOfCurrentRenter);
         }
     }
 }
