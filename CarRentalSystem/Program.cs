@@ -1,9 +1,10 @@
 ﻿using CarRentalSystem;
 using System.Globalization;
-
+//using dictionaries as it allows me to store a key reducing the amount of time taken to search for specific instances of each class
+//key is the number plate for cars and the email for users
 Dictionary<string, Car>cars = new Dictionary<string, Car>();
 Dictionary<string, User>users = new Dictionary<string, User>();
-
+//using binary files instead of JSONs as the system could be storing thousands of instances for both classes, creating massive file sizes if using JSONs
 FileStream carsFile = File.Open("cars.dat", FileMode.OpenOrCreate);
 FileStream usersFile = File.Open("users.dat", FileMode.OpenOrCreate);
 
@@ -202,6 +203,7 @@ if (currentUser.GetIsStaff())
                     while (true)
                     {
                         Console.Write($"Are you sure you want to delete {emailToRemove}(Y/N): ");
+                        //set to upper to prevent case sensitivity
                         string confirmation = Console.ReadLine().ToUpper();
                         if (confirmation == "Y")
                         {
