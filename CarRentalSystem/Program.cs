@@ -304,11 +304,11 @@ else
                             break;
                         }
                     }
-                    int totalCost = daysRenting * Convert.ToInt32(cars[regPlateToRent].GetCostToRent());
+                    int totalCost = daysRenting * Convert.ToInt32(cars[regPlateToRent].GetCostToRent()); //find cost to rent
                     Console.Write($"The total cost of renting {regPlateToRent} for {daysRenting} days is £{totalCost} " +
                         $"\nDo you want to continue(Y/N)");
-                    string option = Console.ReadLine().ToUpper();
-                    if(option == "Y")
+                    string option = Console.ReadLine().ToUpper();//set to upper to prevent case sensitivity
+                    if (option == "Y")
                     {
                         cars[regPlateToRent].SetEmailOfCurrentRenter(currentUser.GetEmail());
                         cars[regPlateToRent].SetAvailability(false);
@@ -369,6 +369,8 @@ carsFile.Close();
 
 Console.WriteLine("PROGRAM ENDED \nSEE YOU LATER :)");
 
+//created this as a method due to repeat use in the program
+//the parameter of time delay (in ms) is because the wait doesn't need to be as long for every use of the method
 void GetAvailableVehicles(int timeDelay)
 {
     Parallel.ForEach(cars, (kvp, state) =>
