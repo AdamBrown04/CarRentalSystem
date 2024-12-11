@@ -75,7 +75,8 @@ if (currentUser.GetIsStaff())
     while (!exit)
     {
         Console.Clear();
-        Console.WriteLine("MENU \n1)Add a new vehicle \n2)Remove a vehicle \n3)Add a new user \n4)Remove a user \n5)Remove a person who's currently renting \n6)Available vehicles \n7)Close program");
+        Console.WriteLine("==========MENU========== \n1) Add a new vehicle \n2) Remove a vehicle \n3) Add a new user \n4) Remove a user " +
+            "\n5) Remove current renter \n6) Available vehicles \n7) Close program");
         string userOption = Console.ReadLine().Trim();
         Console.Clear();
         switch (userOption) 
@@ -276,7 +277,8 @@ else
     while (!exit)
     {
         Console.Clear();
-        Console.WriteLine("MENU \n1)Rent a vehicle \n2)View available vehicles \n3)View previously rented vehicles \n4) \n5)Exit program");
+        Console.WriteLine("===============MENU=============== \n1) Rent a vehicle \n2) View available vehicles " +
+            "\n3) View previously rented vehicles \n4) \n5) Exit program");
         string userOption = Console.ReadLine().Trim();
         Console.Clear();
         switch (userOption)
