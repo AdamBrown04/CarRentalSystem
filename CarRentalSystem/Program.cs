@@ -104,7 +104,7 @@ if (currentUser.GetIsStaff())
                 {
                     Console.WriteLine($"{costToRentString} is an invalid input, please enter a valid number");
                     Task.Delay(1500).Wait();
-                    break;
+                    return;
                 }
                 if(costToRent > 0f)
                 {
@@ -304,7 +304,7 @@ else
         {
             case "1":
                 GetAvailableVehicles(100);
-                Console.WriteLine("Enter number plate of vehicle you want to rent: ");
+                Console.Write("Enter number plate of vehicle you want to rent: ");
                 string regPlateToRent = Console.ReadLine().ToUpper();
 
                 if (cars.ContainsKey(regPlateToRent) && cars[regPlateToRent].GetAvailability())
@@ -313,7 +313,17 @@ else
                     while (true)
                     {
                         Console.Write("Enter the number of days you want to rent the vehicle for: ");
-                        daysRenting = Convert.ToInt32(Console.ReadLine());
+                        string daysRentingString = Console.ReadLine();
+                        try
+                        {
+                            daysRenting = Convert.ToInt32(daysRentingString);
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Invalid input, please enter a valid number");
+                            Task.Delay(1500).Wait();
+                            continue;
+                        }
                         if (daysRenting < 1)
                         {
                             Console.WriteLine("Invalid input, cannot rent for less then a day");
