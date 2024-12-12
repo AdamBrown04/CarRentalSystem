@@ -94,10 +94,29 @@ if (currentUser.GetIsStaff())
                 Console.Write("Body type: ");
                 string bodyType = Console.ReadLine();
                 Console.Write("Cost to rent: ");
-                float costToRent = Convert.ToSingle(Console.ReadLine());
-                Car newCar = new Car(make, model, yom, numberPlate, bodyType, costToRent, true);
-                cars.Add(numberPlate, newCar);
-                newCar.AddToFile(carsFile);
+                string costToRentString = Console.ReadLine();
+                float costToRent = 0f;
+                try
+                {
+                     costToRent = Convert.ToSingle(costToRentString);
+                }
+                catch
+                {
+                    Console.WriteLine($"{costToRentString} is an invalid input, please enter a valid number");
+                    Task.Delay(1500).Wait();
+                    break;
+                }
+                if(costToRent > 0f)
+                {
+                    Car newCar = new Car(make, model, yom, numberPlate, bodyType, costToRent, true);
+                    cars.Add(numberPlate, newCar);
+                    newCar.AddToFile(carsFile);
+                }
+                else
+                {
+                    Console.WriteLine($"{costToRent} is not a valid value, please enter a value above 0");
+                    Task.Delay(1500).Wait();
+                }
                 break;
             case "2":
                 Console.Write("Enter number plate of vehicle you want to remove: ");
