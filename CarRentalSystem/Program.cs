@@ -284,10 +284,7 @@ if (currentUser.GetIsStaff())
                 Task.Delay (2000).Wait();
                 break;
         }
-
     }
-
-
 }
 else
 {

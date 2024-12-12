@@ -71,7 +71,7 @@ namespace CarRentalSystem
             isAvailable = availability;
         }
 
-        public void AddToFile(FileStream file)
+        public void AddToFile(FileStream file)//this adds the instance of the car class to the binary file
         {
             BinaryWriter bw = new BinaryWriter(file);
             bw.Write(make);

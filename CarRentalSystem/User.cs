@@ -52,12 +52,12 @@ namespace CarRentalSystem
         {
             return rentHistory;
         }
-
+        //adds a new vehicle to the rent history
         public void AddToRentHistory(string vehicleRegPlate)
         {
             rentHistory.Add(vehicleRegPlate);
         }
-
+        //this is to be able to store the list in the binary file
         public string GetRentString()
         {
             string rentString = "";
@@ -67,7 +67,7 @@ namespace CarRentalSystem
             }
             return rentString;
         }
-
+        //this is to be able to read data from the binary file into a list
         public List<string> GetRentListFromString(string rentString)
         {
             List<string> rentalHistory = rentString.Split(";").ToList();
@@ -77,7 +77,7 @@ namespace CarRentalSystem
         {
             rentHistory = rentalHistory;
         }
-        public void AddToFile(FileStream file) //add user to file
+        public void AddToFile(FileStream file) //adds the instance of user to binary file
         {
             BinaryWriter bw = new BinaryWriter(file);
             bw.Write(fName + " " + lName);
