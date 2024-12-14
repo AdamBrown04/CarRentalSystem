@@ -13,18 +13,16 @@ namespace CarRentalSystem
         private string lName;
         private string email;
         private string password;
-        private string dob;
         private bool isStaff;
         private List<string> rentHistory = new List<string>();
         //constructor
-        public User(string name, string email, string password, string DoB, bool isStaff)
+        public User(string name, string email, string password, bool isStaff)
         {
             string[] names = name.Split(" ");
             fName = names[0];
             lName = names[1];
             this.email = email;
             this.password = password;
-            dob = DoB;
             this.isStaff = isStaff;
         }
         //Get operations
@@ -39,10 +37,6 @@ namespace CarRentalSystem
         public string GetEmail()
         {
             return email;
-        }
-        public string GetDoB()
-        {
-            return dob;
         }
         public bool GetIsStaff()
         {
@@ -86,7 +80,6 @@ namespace CarRentalSystem
             bw.Write(fName + " " + lName);
             bw.Write(email);
             bw.Write(password);
-            bw.Write(dob);
             bw.Write(isStaff);
             bw.Write(GetRentString());
             bw.Flush();

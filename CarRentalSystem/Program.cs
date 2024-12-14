@@ -22,7 +22,7 @@ while (carsReader.BaseStream.Position < carsReader.BaseStream.Length)
 BinaryReader usersReader = new BinaryReader(usersFile);
 while(usersReader.BaseStream.Position < usersReader.BaseStream.Length)
 {
-    User addUser = new User(usersReader.ReadString(), usersReader.ReadString(), usersReader.ReadString(), usersReader.ReadString(), usersReader.ReadBoolean());
+    User addUser = new User(usersReader.ReadString(), usersReader.ReadString(), usersReader.ReadString(), usersReader.ReadBoolean());
     addUser.GetRentListFromString(usersReader.ReadString());
     users.Add(addUser.GetEmail(), addUser);
 }
@@ -407,3 +407,5 @@ void GetAvailableVehicles(int timeDelay)
     });
     Task.Delay(timeDelay).Wait();
 }
+//thought about using IEnumerable here but decided against it as I am using a dictionary and not a list
+//if I was using a list, I believe I would have still used this method as it would allow for better scalability
