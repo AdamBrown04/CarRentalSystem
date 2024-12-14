@@ -294,7 +294,7 @@ else
     {
         Console.Clear();
         Console.WriteLine("===============MENU=============== \n1) Rent a vehicle \n2) View available vehicles " +
-            "\n3) View previously rented vehicles \n4) \n5) Exit program");
+            "\n3) View previously rented vehicles \n4) Exit program");
         string userOption = Console.ReadLine().Trim();
         Console.Clear();
         switch (userOption)
@@ -381,9 +381,6 @@ else
                 }
                 break;
             case "4":
-
-                break;
-            case "5":
                 exit = true;
                 break;
             default:
