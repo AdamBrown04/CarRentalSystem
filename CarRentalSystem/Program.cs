@@ -174,20 +174,6 @@ if (currentUser.GetIsStaff())
                 string email = Console.ReadLine();
                 Console.Write("Password: ");
                 string password = Console.ReadLine();
-                string dob;
-                while (true)
-                {
-                    Console.Write("Date of birth(DD/MM/YYYY): ");
-                    dob = Console.ReadLine();
-                    if (dob.Length == 10 && dob[2] == '/' && dob[5] == '/')
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("INCORRECT INPUT! \nPlease make sure you are entering the date in the correct format (DD/MM/YYYY)");
-                    }
-                }
                 bool staffCheck;
                 while (true)
                 {
@@ -210,7 +196,7 @@ if (currentUser.GetIsStaff())
                 }
                 List<string> RentalHistory = new List<string>();
                 RentalHistory.Add(";");
-                User newUser = new User(name, email, password, dob, staffCheck);
+                User newUser = new User(name, email, password,staffCheck);
                 newUser.SetRentHistory(RentalHistory);
                 users.Add(email, newUser);
                 newUser.AddToFile(usersFile);
