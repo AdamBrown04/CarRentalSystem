@@ -211,7 +211,7 @@ if (currentUser.GetIsStaff())
                             Console.WriteLine($"{emailToRemove} has been removed");
                             Task.Delay(1500).Wait();
                             break;
-                            //remove from file
+                            //update file
                         }
                         else if (confirmation == "N")
                         {
