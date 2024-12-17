@@ -29,6 +29,22 @@ while(usersReader.BaseStream.Position < usersReader.BaseStream.Length)
 
 
 User currentUser = null; //set as null to prevent an error on line 59, don't understand why it's needed but it works
+
+string adminLine = args[0];
+string adminPassword = args[1];
+
+foreach(string arg in args)
+{
+    Console.WriteLine(arg);
+}
+
+if(adminLine == "--a")
+{
+    Console.WriteLine("Hola");
+}
+
+
+Task.Delay(1500).Wait();
 bool found = false;
 
 while (!found)
