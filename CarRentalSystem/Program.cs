@@ -26,25 +26,34 @@ while(usersReader.BaseStream.Position < usersReader.BaseStream.Length)
     addUser.GetRentListFromString(usersReader.ReadString());
     users.Add(addUser.GetEmail(), addUser);
 }
+//this is what is used when the program is ran in command line, meant to be used for admin purposes and not just for general staff
+bool adminLine = false;
+bool validLogin = false;
+
+foreach (string arg in args)
+{
+    if(arg == "--a")
+    {
+        adminLine = true;
+    }
+    if(adminLine && validLogin)
+    {
+        validLogin = false;
+    }
+    if(adminLine && arg == "pswrd")
+    {
+        validLogin = true;
+    }
+}
+
+if (validLogin)
+{
+    AddNewUser();
+    Environment.Exit(0);
+}
 
 
 User currentUser = null; //set as null to prevent an error on line 59, don't understand why it's needed but it works
-
-string adminLine = args[0];
-string adminPassword = args[1];
-
-foreach(string arg in args)
-{
-    Console.WriteLine(arg);
-}
-
-if(adminLine == "--a")
-{
-    Console.WriteLine("Hola");
-}
-
-
-Task.Delay(1500).Wait();
 bool found = false;
 
 while (!found)
@@ -183,39 +192,7 @@ if (currentUser.GetIsStaff())
                 }
                 break;
             case "3":
-                Console.WriteLine("Enter persons information");
-                Console.Write("Name: ");
-                string name = Console.ReadLine();
-                Console.Write("Email: ");
-                string email = Console.ReadLine();
-                Console.Write("Password: ");
-                string password = Console.ReadLine();
-                bool staffCheck;
-                while (true)
-                {
-                    Console.Write("Staff(true/false): ");
-                    string staff = Console.ReadLine().ToLower();
-                    if (staff == "true")
-                    {
-                        staffCheck = true;
-                        break;
-                    }
-                    else if (staff == "false")
-                    {
-                        staffCheck = false;
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid option, please enter either true or false");
-                    }
-                }
-                List<string> RentalHistory = new List<string>();
-                RentalHistory.Add(";");
-                User newUser = new User(name, email, password,staffCheck);
-                newUser.SetRentHistory(RentalHistory);
-                users.Add(email, newUser);
-                newUser.AddToFile(usersFile);
+                AddNewUser();
                 break;
             case "4":
                 Console.Write("Enter email of user you wish to remove: ");
@@ -411,3 +388,41 @@ void GetAvailableVehicles(int timeDelay)
 }
 //thought about using IEnumerable here but decided against it as I am using a dictionary and not a list
 //if I was using a list, I believe I would have still used this method as it would allow for better scalability
+
+//this is used to add new users to the system, made it a method as it is used in two different places in the program 
+void AddNewUser()
+{
+    Console.WriteLine("Enter persons information");
+    Console.Write("Name: ");
+    string name = Console.ReadLine();
+    Console.Write("Email: ");
+    string email = Console.ReadLine();
+    Console.Write("Password: ");
+    string password = Console.ReadLine();
+    bool staffCheck;
+    while (true)
+    {
+        Console.Write("Staff(true/false): ");
+        string staff = Console.ReadLine().ToLower();
+        if (staff == "true")
+        {
+            staffCheck = true;
+            break;
+        }
+        else if (staff == "false")
+        {
+            staffCheck = false;
+            break;
+        }
+        else
+        {
+            Console.WriteLine("Invalid option, please enter either true or false");
+        }
+    }
+    List<string> RentalHistory = new List<string>();
+    RentalHistory.Add(";");
+    User newUser = new User(name, email, password, staffCheck);
+    newUser.SetRentHistory(RentalHistory);
+    users.Add(email, newUser);
+    newUser.AddToFile(usersFile);
+}
