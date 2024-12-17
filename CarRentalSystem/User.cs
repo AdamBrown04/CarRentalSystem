@@ -74,15 +74,27 @@ namespace CarRentalSystem
         {
             rentHistory = rentalHistory;
         }
-        public void AddToFile(FileStream file) //adds the instance of user to binary file
+        public void AddToFile(FileStream file, string action) //adds the instance of user to binary file
         {
             BinaryWriter bw = new BinaryWriter(file);
-            bw.Write(fName + " " + lName);
-            bw.Write(email);
-            bw.Write(password);
-            bw.Write(isStaff);
-            bw.Write(GetRentString());
-            bw.Flush();
+            while (true)
+            {
+                if (action == "w")
+                {
+                    bw.Write(fName + " " + lName);
+                    bw.Write(email);
+                    bw.Write(password);
+                    bw.Write(isStaff);
+                    bw.Write(GetRentString());
+                    bw.Flush();
+                    break;
+                }
+                else if (action == "u")
+                {
+                    bw.Seek(0, SeekOrigin.Begin);
+                    action = "w";
+                }
+            }
         }
     }
 }

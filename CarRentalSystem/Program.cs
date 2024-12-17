@@ -424,5 +424,5 @@ void AddNewUser()
     User newUser = new User(name, email, password, staffCheck);
     newUser.SetRentHistory(RentalHistory);
     users.Add(email, newUser);
-    newUser.AddToFile(usersFile);
+    newUser.AddToFile(usersFile,"w");
 }
