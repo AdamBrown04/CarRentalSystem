@@ -1,5 +1,6 @@
 ﻿using CarRentalSystem;
 using System.Globalization;
+using System.Runtime.InteropServices;
 //using dictionaries as it allows me to store a key reducing the amount of time taken to search for specific instances of each class
 //key is the number plate for cars and the email for users
 Dictionary<string, Car>cars = new Dictionary<string, Car>();
@@ -12,9 +13,10 @@ BinaryReader carsReader = new BinaryReader(carsFile);
 while (carsReader.BaseStream.Position < carsReader.BaseStream.Length)
 {
     Car addCar = new Car(carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadString(), carsReader.ReadSingle(),carsReader.ReadBoolean());
-    if(carsReader.ReadString() != "unavailable")
+    string email = carsReader.ReadString();
+    if (email != "unavailable")
     {
-        addCar.SetEmailOfCurrentRenter(carsReader.ReadString());
+        addCar.SetEmailOfCurrentRenter(email);
     }
     cars.Add(addCar.GetNumberPlate(), addCar);
 }
@@ -158,6 +160,7 @@ if (currentUser.GetIsStaff())
                             {
                                 cars.Remove(carToRemove);
                                 Console.Clear();
+                                UpdateCarFile();
                                 Console.WriteLine($"{carToRemove} has been removed");
                                 Task.Delay(1500).Wait();
                                 break;
@@ -207,11 +210,11 @@ if (currentUser.GetIsStaff())
                         if (confirmation == "Y")
                         {
                             users.Remove(emailToRemove);
+                            UpdateUserFile();
                             Console.Clear();
                             Console.WriteLine($"{emailToRemove} has been removed");
                             Task.Delay(1500).Wait();
                             break;
-                            //update file
                         }
                         else if (confirmation == "N")
                         {
@@ -243,6 +246,7 @@ if (currentUser.GetIsStaff())
                 {
                     cars[numberPlateForEmail].SetEmailOfCurrentRenter("");
                     cars[numberPlateForEmail].SetAvailability(true);
+                    UpdateCarFile();
                     Console.WriteLine("Person has been removed from the vehicle");
                     Task.Delay(1500).Wait();
                 }
@@ -320,10 +324,11 @@ else
                         cars[regPlateToRent].SetEmailOfCurrentRenter(currentUser.GetEmail());
                         cars[regPlateToRent].SetAvailability(false);
                         users[currentUser.GetEmail()].AddToRentHistory(regPlateToRent);
+                        UpdateUserFile();
+                        UpdateCarFile();
                         Console.WriteLine("Vehicle has been rented");
                         Task.Delay(1500).Wait();
                         Console.Clear();
-                        //need to add file updating
                     }
                     else
                     {
@@ -424,5 +429,26 @@ void AddNewUser()
     User newUser = new User(name, email, password, staffCheck);
     newUser.SetRentHistory(RentalHistory);
     users.Add(email, newUser);
-    newUser.AddToFile(usersFile,"w");
+    newUser.AddToFile(usersFile);
+}
+//method used due to multiple instances of updating the file
+void UpdateUserFile()
+{
+//Close the file to make sure no errors occur and then re-open the same file under the same vairable but using FileMode.create to allow me to complete rewrite all data
+    usersFile.Close();
+    usersFile = File.Open("users.dat", FileMode.Create);
+    foreach (KeyValuePair<string, User> user in users)
+    {
+        users[user.Key].AddToFile(usersFile);
+    }
+}
+//method used due to multiple instances of updating the file
+void UpdateCarFile()
+{
+    carsFile.Close();
+    carsFile = File.Open("cars.dat", FileMode.Create);
+    foreach (KeyValuePair<string, Car> car in cars)
+    {
+        cars[car.Key].AddToFile(carsFile);
+    }
 }
