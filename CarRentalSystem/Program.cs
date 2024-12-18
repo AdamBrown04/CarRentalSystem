@@ -50,7 +50,30 @@ foreach (string arg in args)
 
 if (validLogin)
 {
-    AddNewUser();
+    bool loop = true;
+    while (loop)
+    {
+        Console.Write(">");
+        string adminInput = Console.ReadLine().ToLower();
+        switch (adminInput)
+        {
+            case "--n":
+                AddNewUser();
+                break;
+            case "--r":
+                RemoveUser();
+                break;
+            case "--h":
+                Console.Write("COMMANDS: \n--n: Add a new user \n--r: Remove a user \n--e: Exit program \n");
+                break;
+            case "--e":
+                loop = false;
+                break;
+            default:
+                Console.Write("INVALID INPUT \nUSE --h FOR HELP");
+                break;
+        }
+    }
     Environment.Exit(0);
 }
 
@@ -198,39 +221,7 @@ if (currentUser.GetIsStaff())
                 AddNewUser();
                 break;
             case "4":
-                Console.Write("Enter email of user you wish to remove: ");
-                string emailToRemove = Console.ReadLine();
-                if (users.ContainsKey(emailToRemove))
-                {
-                    while (true)
-                    {
-                        Console.Write($"Are you sure you want to delete {emailToRemove}(Y/N): ");
-                        //set to upper to prevent case sensitivity
-                        string confirmation = Console.ReadLine().ToUpper();
-                        if (confirmation == "Y")
-                        {
-                            users.Remove(emailToRemove);
-                            UpdateUserFile();
-                            Console.Clear();
-                            Console.WriteLine($"{emailToRemove} has been removed");
-                            Task.Delay(1500).Wait();
-                            break;
-                        }
-                        else if (confirmation == "N")
-                        {
-                            Console.Clear();
-                            Console.WriteLine($"{emailToRemove} has not been removed");
-                            Task.Delay(1500).Wait();
-                            break;
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Input is invalid, please provide a valid input");
-                            Task.Delay(1500).Wait();
-                        }
-                    }
-                }
+                RemoveUser();
                 break;
             case "5":
                 Parallel.ForEach(cars, (kvp, state) =>
@@ -432,6 +423,43 @@ void AddNewUser()
     newUser.SetRentHistory(RentalHistory);
     users.Add(email, newUser);
     newUser.AddToFile(usersFile);
+}
+//method as it is used in multiple places
+void RemoveUser()
+{
+    Console.Write("Enter email of user you wish to remove: ");
+    string emailToRemove = Console.ReadLine();
+    if (users.ContainsKey(emailToRemove))
+    {
+        while (true)
+        {
+            Console.Write($"Are you sure you want to delete {emailToRemove}(Y/N): ");
+            //set to upper to prevent case sensitivity
+            string confirmation = Console.ReadLine().ToUpper();
+            if (confirmation == "Y")
+            {
+                users.Remove(emailToRemove);
+                UpdateUserFile();
+                Console.Clear();
+                Console.WriteLine($"{emailToRemove} has been removed");
+                Task.Delay(1500).Wait();
+                break;
+            }
+            else if (confirmation == "N")
+            {
+                Console.Clear();
+                Console.WriteLine($"{emailToRemove} has not been removed");
+                Task.Delay(1500).Wait();
+                break;
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Input is invalid, please provide a valid input");
+                Task.Delay(1500).Wait();
+            }
+        }
+    }
 }
 //method used due to multiple instances of updating the file
 void UpdateUserFile()
