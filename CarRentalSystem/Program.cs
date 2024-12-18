@@ -357,6 +357,7 @@ else
                             Console.WriteLine($"{cars[vehicle].GetMake()} {cars[vehicle].GetModel()}--{vehicle}");
                         }
                     });
+                    Task.Delay(2500).Wait();
                 }
                 else
                 {

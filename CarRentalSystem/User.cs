@@ -62,13 +62,13 @@ namespace CarRentalSystem
             return rentString;
         }
         //this is to be able to read data from the binary file into a list
-        public List<string> GetRentListFromString(string rentString)
+        public void GetRentListFromString(string rentString)
         {
             List<string> rentalHistory = rentString.Split(";").ToList();
             rentHistory.Capacity = rentalHistory.Count;
             //intentially left the capacity to be the same as count, not one less
             //as it is likely when a user logs into the system they want to rent a new car and therefore removes the operations to increase list capacity 
-            return rentalHistory;
+            SetRentHistory(rentalHistory);
         }
         public void SetRentHistory(List<string> rentalHistory)
         {
