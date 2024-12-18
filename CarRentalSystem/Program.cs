@@ -61,7 +61,11 @@ if (validLogin)
                 AddNewUser();
                 break;
             case "--r":
-                RemoveUser();
+                Parallel.ForEach(users, (kvp, state) =>
+                {
+                    Console.WriteLine(kvp.Key);
+                });
+                RemoveUser(true);
                 break;
             case "--h":
                 Console.Write("COMMANDS: \n--n: Add a new user \n--r: Remove a user \n--e: Exit program \n");
@@ -221,7 +225,14 @@ if (currentUser.GetIsStaff())
                 AddNewUser();
                 break;
             case "4":
-                RemoveUser();
+                Parallel.ForEach(users, (kvp, state) =>
+                {
+                    if (!users[kvp.Key].GetIsStaff())
+                    {
+                        Console.WriteLine(kvp.Key);
+                    }   
+                });
+                RemoveUser(false);
                 break;
             case "5":
                 Parallel.ForEach(cars, (kvp, state) =>
@@ -425,38 +436,47 @@ void AddNewUser()
     newUser.AddToFile(usersFile);
 }
 //method as it is used in multiple places
-void RemoveUser()
+//isAdmin is used to determine if the user is coming from the full program or the admin command line as this changes what the user can do
+void RemoveUser(bool isAdmin)
 {
     Console.Write("Enter email of user you wish to remove: ");
     string emailToRemove = Console.ReadLine();
     if (users.ContainsKey(emailToRemove))
     {
-        while (true)
+        if (!isAdmin && users[emailToRemove].GetIsStaff())
         {
-            Console.Write($"Are you sure you want to delete {emailToRemove}(Y/N): ");
-            //set to upper to prevent case sensitivity
-            string confirmation = Console.ReadLine().ToUpper();
-            if (confirmation == "Y")
+            Console.WriteLine("You do not have permission to remove this user");
+            Task.Delay(1500).Wait();
+        }
+        else
+        {
+            while (true)
             {
-                users.Remove(emailToRemove);
-                UpdateUserFile();
-                Console.Clear();
-                Console.WriteLine($"{emailToRemove} has been removed");
-                Task.Delay(1500).Wait();
-                break;
-            }
-            else if (confirmation == "N")
-            {
-                Console.Clear();
-                Console.WriteLine($"{emailToRemove} has not been removed");
-                Task.Delay(1500).Wait();
-                break;
-            }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("Input is invalid, please provide a valid input");
-                Task.Delay(1500).Wait();
+                Console.Write($"Are you sure you want to delete {emailToRemove}(Y/N): ");
+                //set to upper to prevent case sensitivity
+                string confirmation = Console.ReadLine().ToUpper();
+                if (confirmation == "Y")
+                {
+                    users.Remove(emailToRemove);
+                    UpdateUserFile();
+                    Console.Clear();
+                    Console.WriteLine($"{emailToRemove} has been removed");
+                    Task.Delay(1500).Wait();
+                    break;
+                }
+                else if (confirmation == "N")
+                {
+                    Console.Clear();
+                    Console.WriteLine($"{emailToRemove} has not been removed");
+                    Task.Delay(1500).Wait();
+                    break;
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Input is invalid, please provide a valid input");
+                    Task.Delay(1500).Wait();
+                }
             }
         }
     }
