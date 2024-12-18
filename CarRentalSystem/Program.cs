@@ -315,9 +315,10 @@ else
                             break;
                         }
                     }
+                    Console.Clear();
                     int totalCost = daysRenting * Convert.ToInt32(cars[regPlateToRent].GetCostToRent()); //find cost to rent
                     Console.Write($"The total cost of renting {regPlateToRent} for {daysRenting} days is £{totalCost} " +
-                        $"\nDo you want to continue(Y/N)");
+                        $"\nDo you want to continue(Y/N) ");
                     string option = Console.ReadLine().ToUpper();//set to upper to prevent case sensitivity
                     if (option == "Y")
                     {
@@ -410,12 +411,12 @@ void AddNewUser()
     {
         Console.Write("Staff(true/false): ");
         string staff = Console.ReadLine().ToLower();
-        if (staff == "true")
+        if (staff == "true" || staff == "t")
         {
             staffCheck = true;
             break;
         }
-        else if (staff == "false")
+        else if (staff == "false" || staff == "f")
         {
             staffCheck = false;
             break;
@@ -438,6 +439,7 @@ void UpdateUserFile()
 //Close the file to make sure no errors occur and then re-open the same file under the same vairable but using FileMode.create to allow me to complete rewrite all data
     usersFile.Close();
     usersFile = File.Open("users.dat", FileMode.Create);
+    //used a regular foreach here due to needing to access the file in a linear method
     foreach (KeyValuePair<string, User> user in users)
     {
         users[user.Key].AddToFile(usersFile);
