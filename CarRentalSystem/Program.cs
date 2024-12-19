@@ -1,4 +1,5 @@
 ﻿//link to GitHub page with readme: https://github.com/AdamBrown04/CarRentalSystem
+//TL:DR of readme is to use --a pswrd when using the program for the first time in command line so you can add an account to the system
 
 using CarRentalSystem;
 using System.Globalization;
