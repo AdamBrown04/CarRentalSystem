@@ -1,4 +1,6 @@
-﻿using CarRentalSystem;
+﻿//link to GitHub page with readme: https://github.com/AdamBrown04/CarRentalSystem
+
+using CarRentalSystem;
 using System.Globalization;
 using System.Runtime.InteropServices;
 //using dictionaries as it allows me to store a key reducing the amount of time taken to search for specific instances of each class
